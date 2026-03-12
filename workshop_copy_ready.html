@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>洋基喵客鬆 3rd 冒險挑戰篇 🐉💥 ｜ 課程用文字（可一鍵複製）</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#111a33;
+      --card2:#0f1730;
+      --text:#e8ecff;
+      --muted:#aab3d6;
+      --line:#273055;
+      --accent:#7aa2ff;
+      --ok:#44d19d;
+      --warn:#ffd36a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans TC", Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 20% -10%, #1c2a66 0%, transparent 55%),
+                  radial-gradient(900px 700px at 110% 10%, #2b1e63 0%, transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    header{padding:28px 18px 10px;max-width:1100px;margin:0 auto;}
+    h1{margin:0 0 6px;font-size:22px;letter-spacing:.2px;}
+    .sub{margin:0 0 14px;color:var(--muted);font-size:14px;}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0 10px;}
+    .search{flex:1 1 260px;display:flex;gap:8px;align-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:10px 12px;}
+    .search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:14px;}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.05);color:var(--muted);font-size:13px;user-select:none;}
+    main{max-width:1100px;margin:0 auto;padding:0 18px 32px;}
+    details{border:1px solid rgba(255,255,255,.10);border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));margin:12px 0;overflow:hidden;}
+    summary{cursor:pointer;list-style:none;padding:14px 14px;display:flex;gap:10px;align-items:flex-start;}
+    summary::-webkit-details-marker{display:none}
+    .pageTag{flex:0 0 auto;font-weight:700;color:#0b1020;background:linear-gradient(135deg, var(--accent), #a5baff);padding:6px 10px;border-radius:999px;font-size:12px;margin-top:1px;}
+    .sumText{flex:1 1 auto;min-width:0;}
+    .title{font-weight:700;font-size:15px;margin:0 0 2px;}
+    .hint{margin:0;color:var(--muted);font-size:13px;}
+    .content{padding:0 14px 14px;border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.10);}
+    .copyBlock{margin:12px 0;border:1px solid rgba(255,255,255,.10);border-radius:14px;background:linear-gradient(180deg, rgba(17,26,51,.85), rgba(15,23,48,.85));overflow:hidden;}
+    .copyTop{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08);}
+    .label{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    button.copyBtn{flex:0 0 auto;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--text);padding:7px 10px;border-radius:10px;font-size:12px;cursor:pointer;transition:.15s ease;}
+    button.copyBtn:hover{background:rgba(255,255,255,.10)}
+    button.copyBtn:active{transform:translateY(1px)}
+    pre{margin:0;padding:12px;white-space:pre-wrap;word-break:break-word;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-size:13px;color:var(--text);}
+    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:rgba(0,0,0,.70);border:1px solid rgba(255,255,255,.14);color:var(--text);padding:10px 12px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px);}
+    .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:2px 6px;border-radius:8px;color:var(--text);font-size:12px;}
+    .count{color:var(--muted);font-size:13px;}
+    .launchCard{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:12px 0;padding:16px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(135deg,#1a2b55,#0f1e40);text-decoration:none;color:var(--text);transition:.18s ease;}
+    .launchCard:hover{border-color:rgba(122,162,255,.6);background:linear-gradient(135deg,#223a72,#12265a);transform:translateY(-1px);}
+    .launchLeft{display:flex;flex-direction:column;gap:4px;min-width:0;}
+    .launchTitle{font-size:14px;font-weight:600;}
+    .launchUrl{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas;font-size:13px;color:var(--muted);word-break:break-all;}
+    .launchBtn{flex:0 0 auto;padding:8px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);font-size:12px;}
+    @media (max-width: 640px){
+      summary{padding:12px;}
+      .copyTop{align-items:flex-start;flex-direction:column;}
+      .launchCard{flex-direction:column;align-items:flex-start;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>洋基喵客鬆 3rd 冒險挑戰篇 🐉💥 ｜ 課程用文字（可一鍵複製）</h1>
+    <p class="sub">點開每一頁（P.6、P.7…）即可查看對應步驟；一般文字可直接按 <span class="kbd">Copy</span>，連結則可直接按 <span class="kbd">Open ↗</span> 跳轉。</p>
+    <div class="toolbar">
+      <div class="search" role="search">
+        <span aria-hidden="true">🔎</span>
+        <input id="q" type="search" placeholder="搜尋：頁碼、標題、關鍵字" />
+      </div>
+      <div class="pill">
+        <span>顯示：</span>
+        <span class="count" id="count">—</span>
+      </div>
+    </div>
+  </header>
+  <main id="app">
+
+    <!-- 範本 -->
+    <details class="slide" data-search="範本 前置作業 上傳 租車報價範本_教學_學生初始用.docx onedrive">
+      <summary>
+        <span class="pageTag">範本</span>
+        <div class="sumText">
+          <p class="title">前置作業、上傳&quot;租車報價範本_教學_學生初始用.docx&quot;</p>
+          <p class="hint">開啟 OneDrive 網站</p>
+        </div>
+      </summary>
+      <div class="content">
+        <a class="launchCard" href="https://onedrive.live.com/login" target="_blank" rel="noopener noreferrer">
+          <div class="launchLeft">
+            <div class="launchTitle">開啟 OneDrive</div>
+            <div class="launchUrl">https://onedrive.live.com/login</div>
+          </div>
+          <div class="launchBtn">Open ↗</div>
+        </a>
+      </div>
+    </details>
+
+    <!-- P.6 -->
+    <details class="slide" data-search="P.6 3 控制項 設定 屬性 標題 標籤 總價">
+      <summary>
+        <span class="pageTag">P.6</span>
+        <div class="sumText">
+          <p class="title">3、多了控制項後 設定屬性 標題和標籤都設定為總價</p>
+          <p class="hint">貼上內容控制項屬性</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="總價">
+          <div class="copyTop">
+            <div class="label">可複製（標題/標籤）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>總價</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.7 -->
+    <details class="slide" data-search="P.7 4 重複 2和3的步驟 型號 天數 描述 單價 小計">
+      <summary>
+        <span class="pageTag">P.7</span>
+        <div class="sumText">
+          <p class="title">4、重複2和3的步驟，在上方的型號、天數、描述、單價、小計做一樣的事</p>
+          <p class="hint">貼上內容控制項屬性</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="型號">
+          <div class="copyTop">
+            <div class="label">可複製（標題/標籤）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>型號</pre>
+        </div>
+        <div class="copyBlock" data-copy="天數">
+          <div class="copyTop">
+            <div class="label">可複製（標題/標籤）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>天數</pre>
+        </div>
+        <div class="copyBlock" data-copy="描述">
+          <div class="copyTop">
+            <div class="label">可複製（標題/標籤）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>描述</pre>
+        </div>
+        <div class="copyBlock" data-copy="單價">
+          <div class="copyTop">
+            <div class="label">可複製（標題/標籤）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>單價</pre>
+        </div>
+        <div class="copyBlock" data-copy="小計">
+          <div class="copyTop">
+            <div class="label">可複製（標題/標籤）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>小計</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.8 -->
+    <details class="slide" data-search="P.8 5 選取 一整排 型號 天數 描述 單價 小計 設定 重複區段內容控制項 報價表">
+      <summary>
+        <span class="pageTag">P.8</span>
+        <div class="sumText">
+          <p class="title">5、選取一整排 (型號、天數、描述、單價、小計)，設定重複區段內容控制項命名為報價表</p>
+          <p class="hint">點開查看並複製對應內容</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="報價表">
+          <div class="copyTop">
+            <div class="label">可複製（標題/標籤）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>報價表</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.10 -->
+    <details class="slide" data-search="P.10 1 新增 agent flow copilot studio">
+      <summary>
+        <span class="pageTag">P.10</span>
+        <div class="sumText">
+          <p class="title">1、新增一個agent flow</p>
+          <p class="hint">開啟 Copilot Studio 網站</p>
+        </div>
+      </summary>
+      <div class="content">
+        <a class="launchCard" href="https://copilotstudio.microsoft.com/" target="_blank" rel="noopener noreferrer">
+          <div class="launchLeft">
+            <div class="launchTitle">開啟Copilot Studio</div>
+            <div class="launchUrl">https://copilotstudio.microsoft.com/</div>
+          </div>
+          <div class="launchBtn">Open ↗</div>
+        </a>
+      </div>
+    </details>
+
+    <!-- P.11 -->
+    <details class="slide" data-search="P.11 2 新增 觸發程序 流程 Agent 報價表 總價">
+      <summary>
+        <span class="pageTag">P.11</span>
+        <div class="sumText">
+          <p class="title">2、新增觸發程序：當Agent呼叫流程時</p>
+          <p class="hint">流程 > 新Agent流程名 > 搜尋</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="Agent">
+          <div class="copyTop">
+            <div class="label">可複製（搜尋文字）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>Agent</pre>
+        </div>
+        <div class="copyBlock" data-copy="報價表">
+          <div class="copyTop">
+            <div class="label">可複製（文字）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>報價表</pre>
+        </div>
+        <div class="copyBlock" data-copy="總價">
+          <div class="copyTop">
+            <div class="label">可複製（文字）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>總價</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.12 -->
+    <details class="slide" data-search="P.12 3 新增 動作 填入 Microsoft Word 範本">
+      <summary>
+        <span class="pageTag">P.12</span>
+        <div class="sumText">
+          <p class="title">3、新增一個動作-填入 Microsoft Word 範本</p>
+          <p class="hint">流程 > 當 Agent 呼叫流程時 > 新增動作(+)</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="填入 Microsoft Word 範本">
+          <div class="copyTop">
+            <div class="label">可複製（搜尋文字）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>填入 Microsoft Word 範本</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.13 -->
+    <details class="slide" data-search="P.13 4 word 範本 OneDrive SharePoint yaris 2 小車 1800 3600">
+      <summary>
+        <span class="pageTag">P.13</span>
+        <div class="sumText">
+          <p class="title">4、先選到word範本(一定要存在OneDrive/SharePoint才行)</p>
+          <p class="hint">流程 > 當 Agent 呼叫流程時 > 新增動作(+) > 填入 Microsoft Word 範本</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="formatDateTime(convertFromUtc(utcNow(), 'Taipei Standard Time'), 'yyyy-MM-dd')">
+          <div class="copyTop">
+            <div class="label">可複製（進階參數 > 報價日期）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>formatDateTime(convertFromUtc(utcNow(), 'Taipei Standard Time'), 'yyyy-MM-dd')</pre>
+        </div>
+        <div class="copyBlock" data-copy="yaris">
+          <div class="copyTop">
+            <div class="label">可複製（進階參數 > 報價表 型號 - 1）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>yaris</pre>
+        </div>
+        <div class="copyBlock" data-copy="2">
+          <div class="copyTop">
+            <div class="label">可複製（進階參數 > 報價表 數量 - 1）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>2</pre>
+        </div>
+        <div class="copyBlock" data-copy="小車 yaris">
+          <div class="copyTop">
+            <div class="label">可複製（進階參數 > 報價表 描述 - 1）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>小車 yaris</pre>
+        </div>
+        <div class="copyBlock" data-copy="1800">
+          <div class="copyTop">
+            <div class="label">可複製（進階參數 > 報價表 單價 - 1）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>1800</pre>
+        </div>
+        <div class="copyBlock" data-copy="3600">
+          <div class="copyTop">
+            <div class="label">可複製（進階參數 > 報價表 小計 - 1）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>3600</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.14 -->
+    <details class="slide" data-search="P.14 5 報價 自己 outlook 報價單Agent 測試 附件">
+      <summary>
+        <span class="pageTag">P.14</span>
+        <div class="sumText">
+          <p class="title">5、將報價資料寄給自己</p>
+          <p class="hint">流程 > 當 Agent 呼叫流程時 > 新增動作(+) > 填入 Microsoft Word 範本 > 新增動作(+)</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="outlook">
+          <div class="copyTop">
+            <div class="label">可複製（搜尋文字）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>outlook</pre>
+        </div>
+        <div class="copyBlock" data-copy="報價單Agent測試">
+          <div class="copyTop">
+            <div class="label">可複製（主旨）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>報價單Agent測試</pre>
+        </div>
+        <div class="copyBlock" data-copy="資訊如附件">
+          <div class="copyTop">
+            <div class="label">可複製（內文）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>資訊如附件</pre>
+        </div>
+        <div class="copyBlock" data-copy="報價.docx">
+          <div class="copyTop">
+            <div class="label">可複製（附件名稱）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>報價.docx</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.16 -->
+    <details class="slide" data-search="P.16 7 建立 agent 參考 txt 租車報價代理人 Car Rental Quotation Agent 核心任務 車款匹配 預算規劃 HTML 報價單 工作流程 規則">
+      <summary>
+        <span class="pageTag">P.16</span>
+        <div class="sumText">
+          <p class="title">7、建立我們的agent(參考txt檔)</p>
+          <p class="hint">貼上指令（角色與範圍）</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="你是一位專業的「租車報價代理人 (Car Rental Quotation Agent)」。你的核心任務是根據客戶需求提供精確的車款匹配、預算規劃，並生成專業的 HTML 報價單。
+核心工作流程與規則：
+需求分析與車款匹配 (Vehicle Matching)：
+依據以下維度篩選車款：座位數、行李量、能源類型（汽、柴、電）、車型、品牌偏好、租期、地點及預算。
+替代邏輯： 若無完全符合車款，依此優先順序尋找替代：車型 &gt; 座位數 &gt; 品牌 &gt; 預算。
+主動說明： 必須明確告知替代原因（例：「原車款已滿租，改提供同級車 Toyota Altis」）。
+預算敏感度與分配 (Budget Allocation)：
+當使用者詢問多種車型時，需在預算內平衡配置。
+若預算吃緊，主動提出「折衷方案」（如：油車代電車、中階代高階）。
+超預算處理： 若無法滿足預算，須清楚列出差額並提供調整建議（如：縮短租期、調整還車點）。
+報價單組成要素 (Vehicle Selection Details)：
+每一筆報價必須包含：車款型號、品牌/車型/座位數描述、數量、單價（日/月租）、小計。
+額外費用： 必須計算並列出保險、甲地乙還費、升級費、里程費、設備租借（如：兒童座椅 500元/日）。
+輸出格式規範 (Presentation)：
+表格要求： 必須使用清潔的 HTML 表格呈現，欄位為：| 型號 | 描述 | 數量 | 單價 | 小計 |。
+總結資訊： 表格下方需顯示 Grand Total（總計）及備註事項（油電量要求、超里程規定）。
+Email 準備： 輸出必須為 HTML 格式，確保標題清晰、對齊美觀。
+語氣與溝通風格：
+專業、友善且透明。
+主動提醒費用細節，以客戶需求為核心。
+示範： 「以下為您整理三款可租用車型，已依您的預算與需求完成最佳配置。」
+執行操作限制：
+當使用者確認報價無誤並要求「寄出」、「傳送郵件」或「Email 給我」時，你必須呼叫預設的 Email 傳送 Action/Plugin 執行任務。
+在未取得完整需求（如：取還車地點、租期）前，應禮貌地追問必要資訊。">
+          <div class="copyTop">
+            <div class="label">可複製（指令）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>你是一位專業的「租車報價代理人 (Car Rental Quotation Agent)」。你的核心任務是根據客戶需求提供精確的車款匹配、預算規劃，並生成專業的 HTML 報價單。
+核心工作流程與規則：
+需求分析與車款匹配 (Vehicle Matching)：
+依據以下維度篩選車款：座位數、行李量、能源類型（汽、柴、電）、車型、品牌偏好、租期、地點及預算。
+替代邏輯： 若無完全符合車款，依此優先順序尋找替代：車型 &gt; 座位數 &gt; 品牌 &gt; 預算。
+主動說明： 必須明確告知替代原因（例：「原車款已滿租，改提供同級車 Toyota Altis」）。</pre>
+預算敏感度與分配 (Budget Allocation)：
+當使用者詢問多種車型時，需在預算內平衡配置。
+若預算吃緊，主動提出「折衷方案」（如：油車代電車、中階代高階）。
+超預算處理： 若無法滿足預算，須清楚列出差額並提供調整建議（如：縮短租期、調整還車點）。
+報價單組成要素 (Vehicle Selection Details)：
+每一筆報價必須包含：車款型號、品牌/車型/座位數描述、數量、單價（日/月租）、小計。
+額外費用： 必須計算並列出保險、甲地乙還費、升級費、里程費、設備租借（如：兒童座椅 500元/日）。</pre>
+輸出格式規範 (Presentation)：
+表格要求： 必須使用清潔的 HTML 表格呈現，欄位為：| 型號 | 描述 | 數量 | 單價 | 小計 |。
+總結資訊： 表格下方需顯示 Grand Total（總計）及備註事項（油電量要求、超里程規定）。
+Email 準備： 輸出必須為 HTML 格式，確保標題清晰、對齊美觀。</pre>
+語氣與溝通風格：
+專業、友善且透明。
+主動提醒費用細節，以客戶需求為核心。
+示範： 「以下為您整理三款可租用車型，已依您的預算與需求完成最佳配置。」</pre>
+執行操作限制：
+當使用者確認報價無誤並要求「寄出」、「傳送郵件」或「Email 給我」時，你必須呼叫預設的 Email 傳送 Action/Plugin 執行任務。
+在未取得完整需求（如：取還車地點、租期）前，應禮貌地追問必要資訊。</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.18 -->
+    <details class="slide" data-search="P.18 9 測試 5000 可以租什麼車">
+      <summary>
+        <span class="pageTag">P.18</span>
+        <div class="sumText">
+          <p class="title">9、先測試一下</p>
+          <p class="hint">租車報價代理人 > 測試(畫面右邊欄位or畫面右上按鈕展開)</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="5000 可以租什麼車？">
+          <div class="copyTop">
+            <div class="label">可複製（測試語句）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>5000 可以租什麼車？</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.19 -->
+    <details class="slide" data-search="P.19 10 測試 預算 3000 可以租什麼車">
+      <summary>
+        <span class="pageTag">P.19</span>
+        <div class="sumText">
+          <p class="title">10、 再測試一下，才會OK</p>
+          <p class="hint">租車報價代理人 > 測試(畫面右邊欄位or畫面右上按鈕展開)</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="預算只有3000 可以租什麼車？">
+          <div class="copyTop">
+            <div class="label">可複製（測試語句）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>預算只有3000 可以租什麼車？</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.21 -->
+    <details class="slide" data-search="P.21 12 工具 名稱 描述 輸入 報價表 總價">
+      <summary>
+        <span class="pageTag">P.21</span>
+        <div class="sumText">
+          <p class="title">12、 工具進來後 名稱、描述和其中輸入的報價表和總價要調整</p>
+          <p class="hint">租車報價代理人 > 工具 > 新增工具 > 流程 > AGENTFLOW_建立報價單 > 詳細資訊 > 名稱/描述
+租車報價代理人 > 工具 > 新增工具 > 流程 > AGENTFLOW_建立報價單 > 輸入 > 報價表/總價 > 值(自訂) > 描述
+          </p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="SEND QUOTATION">
+          <div class="copyTop">
+            <div class="label">可複製（名稱）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>SEND QUOTATION</pre>
+        </div>
+        <div class="copyBlock" data-copy="只有當使用者需要傳送報價單時使用">
+          <div class="copyTop">
+            <div class="label">可複製（描述）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>只有當使用者需要傳送報價單時使用</pre>
+        </div>
+        <div class="copyBlock" data-copy="摘要說明：將每個品牌、型號、座席數和車型分類彙整成清晰的租賃描述。
+數據提取與計算：選取 型號、天數 (Qty)、單價 (Unit Price)，並計算每輛車或加購項目的小計 (Qty * Unit Price)。
+輸出格式：輸出如下的 JSON 陣列：
+[
+  {
+    &quot;型號&quot;: &quot;Toyota yaris&quot;,
+    &quot;天數&quot;: &quot;2&quot;,
+    &quot;描述&quot;: &quot;Toyota Yaris / Vios – 小型車&quot;,
+    &quot;單價&quot;: &quot;1800&quot;,
+    &quot;小計&quot;: &quot;3600&quot;
+  }
+]">
+          <div class="copyTop">
+            <div class="label">可複製（描述）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>摘要說明：將每個品牌、型號、座席數和車型分類彙整成清晰的租賃描述。
+數據提取與計算：選取 型號、天數 (Qty)、單價 (Unit Price)，並計算每輛車或加購項目的小計 (Qty * Unit Price)。
+輸出格式：輸出如下的 JSON 陣列：
+[
+  {
+    &quot;型號&quot;: &quot;Toyota yaris&quot;,
+    &quot;天數&quot;: &quot;2&quot;,
+    &quot;描述&quot;: &quot;Toyota Yaris / Vios – 小型車&quot;,
+    &quot;單價&quot;: &quot;1800&quot;,
+    &quot;小計&quot;: &quot;3600&quot;
+  }
+]</pre>
+        </div>
+        <div class="copyBlock" data-copy="根據上述「報價表」所產生的 JSON 陣列，加總所有「小計」數值，以計算該報價單的總價。
+以數字形式輸出總價，例如：「8490」
+請勿再問使用者。">
+          <div class="copyTop">
+            <div class="label">可複製（描述）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>根據上述「報價表」所產生的 JSON 陣列，加總所有「小計」數值，以計算該報價單的總價。
+以數字形式輸出總價，例如：「8490」
+請勿再問使用者。</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.22 -->
+    <details class="slide" data-search="P.22 13 測試 檔案 10000 可以租什麼車">
+      <summary>
+        <span class="pageTag">P.22</span>
+        <div class="sumText">
+          <p class="title">13、測試一下-&gt;發現檔案有錯</p>
+          <p class="hint">租車報價代理人 > 測試(畫面右邊欄位or畫面右上按鈕展開)</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="10000 可以租什麼車？">
+          <div class="copyTop">
+            <div class="label">可複製（測試語句）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>10000 可以租什麼車？</pre>
+        </div>
+      </div>
+    </details>
+
+    <!-- P.23 -->
+    <details class="slide" data-search="P.23 14 AgentFlow 報價表 總價 動態內容 填入 json">
+      <summary>
+        <span class="pageTag">P.23</span>
+        <div class="sumText">
+          <p class="title">14、回到AgentFlow 將報價表、總價 依動態內容填入</p>
+          <p class="hint">流程 > AGENTFLOW_建立報價單 > 填入 Microsoft Word 範本 > 報價表</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="json(triggerBody()?[&#x27;text&#x27;])">
+          <div class="copyTop">
+            <div class="label">可複製（進階參數）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>json(triggerBody()?[&#x27;text&#x27;])</pre>
+        </div>
+      </div>
+    </details>
+
+
+    <details class="slide" data-search="P.24 15 測試 10000 可以租什麼車">
+      <summary>
+        <span class="pageTag">P.24</span>
+        <div class="sumText">
+          <p class="title">15、再測一次就ok了</p>
+          <p class="hint">租車報價代理人 > 測試(畫面右邊欄位or畫面右上按鈕展開)</p>
+        </div>
+      </summary>
+      <div class="content">
+        <div class="copyBlock" data-copy="10000 可以租什麼車？">
+          <div class="copyTop">
+            <div class="label">可複製（測試語句）</div>
+            <button class="copyBtn" type="button">Copy</button>
+          </div>
+          <pre>10000 可以租什麼車？</pre>
+      </div>
+    </details>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    const toast = document.getElementById('toast');
+    function showToast(msg, ok=true){
+      toast.textContent = msg;
+      toast.style.borderColor = ok ? 'rgba(68,209,157,.35)' : 'rgba(255,211,106,.35)';
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=>toast.classList.remove('show'), 1300);
+    }
+    async function copyText(text){
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (!ok) throw new Error('copy failed');
+    }
+    document.querySelectorAll('.copyBlock').forEach(block=>{
+      const btn = block.querySelector('.copyBtn');
+      btn.addEventListener('click', async ()=>{
+        const text = block.getAttribute('data-copy') || '';
+        try{
+          await copyText(text);
+          btn.textContent = 'Copied ✓';
+          btn.style.borderColor = 'rgba(68,209,157,.45)';
+          showToast('已複製到剪貼簿 ✓', true);
+          setTimeout(()=>{
+            btn.textContent = 'Copy';
+            btn.style.borderColor = 'rgba(255,255,255,.18)';
+          }, 900);
+        }catch(e){
+          showToast('複製失敗：請手動選取複製', false);
+        }
+      });
+    });
+    const q = document.getElementById('q');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const count = document.getElementById('count');
+    function updateCount(n){ count.textContent = `${n} / ${slides.length}`; }
+    function applyFilter(){
+      const term = (q.value || '').trim().toLowerCase();
+      let visible = 0;
+      slides.forEach(s=>{
+        const hay = ((s.getAttribute('data-search') || '') + ' ' + (s.innerText || '')).toLowerCase();
+        const ok = !term || hay.includes(term);
+        s.style.display = ok ? '' : 'none';
+        if (ok) visible++;
+      });
+      updateCount(visible);
+    }
+    q.addEventListener('input', applyFilter);
+    applyFilter();
+  </script>
+</body>
+</html>
